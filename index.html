@@ -142,6 +142,7 @@
     const date = params.get('date');
     const choice = params.get('choice');
     const token = params.get('token');
+    const effort = params.get('effort') || 'low';
 
     if (!date || !choice || !token) {
       return fail('Missing parameters in the URL.');
@@ -154,7 +155,7 @@
       const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ date: date, choice: choice, token: token }),
+        body: JSON.stringify({ date: date, choice: choice, token: token, effort: effort }),
       });
       if (!res.ok) throw new Error('Request failed: ' + res.status);
       const data = await res.json();
